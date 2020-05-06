@@ -1,4 +1,4 @@
-package app.sa.test;
+package app.as.test;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package app.sa;
+package app.as;
 
-import app.sa.test.TestASImpl;
+import app.as.test.TestASImpl;
 
 public class ApplicationServiceFactory {
 

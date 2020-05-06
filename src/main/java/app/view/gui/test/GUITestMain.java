@@ -18,11 +18,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import app.as.ApplicationServiceFactory;
+import app.as.test.TestASImpl;
 import app.controller.Controller;
 import app.data.test.TestTransfer;
 import app.observer.Observer;
-import app.sa.ApplicationServiceFactory;
-import app.sa.test.TestASImpl;
 
 public class GUITestMain extends JPanel implements Observer {
 

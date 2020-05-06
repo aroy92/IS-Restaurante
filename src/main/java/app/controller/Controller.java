@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import app.as.ApplicationServiceFactory;
+import app.as.test.TestASImpl;
 import app.data.MySQLConnectionSingleton;
-import app.sa.ApplicationServiceFactory;
-import app.sa.test.TestASImpl;
 import app.view.View;
 
 public class Controller {
