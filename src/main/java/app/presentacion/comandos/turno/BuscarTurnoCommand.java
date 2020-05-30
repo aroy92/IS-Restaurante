@@ -18,7 +18,7 @@ public class BuscarTurnoCommand implements Command{
 		Contexto contexto;
 		
 		try {
-			turno = sa.mostrar(id);	// Reutilizo la acción de mostrar pues siguen la misma lógica.
+			turno = sa.mostrar(id);	// Reutilizo la acciï¿½n de mostrar pues siguen la misma lï¿½gica.
 			contexto = new Contexto(EventosTurno.BUSCAR_TURNO_OK, turno);
 		} catch(Exception e) {
 			mensaje = e.getMessage();

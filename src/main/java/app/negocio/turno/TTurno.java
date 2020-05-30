@@ -39,7 +39,7 @@ public class TTurno {
 		return hora_fin;
 	}
 	
-	public Boolean getActivo() {
+	public Boolean isActivo() {
 		return activo;
 	}
 	

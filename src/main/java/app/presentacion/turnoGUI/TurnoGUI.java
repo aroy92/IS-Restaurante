@@ -43,8 +43,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		vista();
 	}
 
-	@Override
-	public void vista() {
+	private void vista() {
 		setSize(1080, 720);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -126,13 +125,16 @@ public class TurnoGUI extends JFrame implements GUI{
 				int opcion = JOptionPane.showConfirmDialog(null, mensaje, "ALTA TURNO", JOptionPane.OK_CANCEL_OPTION);
 				if(opcion == JOptionPane.OK_OPTION) {
 					try {
-						if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null) {
+						if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null && !nombreField.getText().equalsIgnoreCase("") && !horaInicioField.getText().equalsIgnoreCase("") && !horaFinField.getText().equalsIgnoreCase("")) {
 							TTurno turno = new TTurno();
 							turno.setNombre(nombreField.getText());
 							turno.setHoraInicio(LocalTime.parse(horaInicioField.getText()));
 							turno.setHoraFin(LocalTime.parse(horaFinField.getText()));
 							Contexto contexto = new Contexto(EventosTurno.ALTA_TURNO, turno);
 							Controlador.getInstance().accion(contexto);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Nombre incorrecto.", "Mensaje de error", JOptionPane.WARNING_MESSAGE);
 						}
 					} catch(DateTimeParseException ex) {
 						JOptionPane.showMessageDialog(null, "Datos introducidos incorrectos.", "Mensaje de error", JOptionPane.WARNING_MESSAGE);
@@ -188,13 +190,13 @@ public class TurnoGUI extends JFrame implements GUI{
 					int opcion = JOptionPane.showConfirmDialog(null, mensaje, "EDITAR TURNO", JOptionPane.OK_CANCEL_OPTION);
 					if(opcion == JOptionPane.OK_OPTION) {
 						try {
-							if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null) {
+							if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null && nombreField.getText().equalsIgnoreCase("") && horaInicioField.getText().equalsIgnoreCase("") && horaFinField.getText().equalsIgnoreCase("")) {
 								TTurno turno = new TTurno();
 								turno.setID(turnoBuscar.getID());
 								turno.setNombre(nombreField.getText());
 								turno.setHoraInicio(LocalTime.parse(horaInicioField.getText()));
 								turno.setHoraFin(LocalTime.parse(horaFinField.getText()));
-								turno.setActivo(turnoBuscar.getActivo());
+								turno.setActivo(turnoBuscar.isActivo());
 								Contexto contexto = new Contexto(EventosTurno.EDITAR_TURNO, turno);
 								Controlador.getInstance().accion(contexto);
 							}
@@ -289,15 +291,9 @@ public class TurnoGUI extends JFrame implements GUI{
 	}
 	
 	public void limpiarTabla() {
-		//tabla.removeAll();
-		/*for(int i = 0; i < dtm.getRowCount(); i++) {
-			dtm.removeRow(i);
-		}*/
-		
 		for(int i = dtm.getRowCount() - 1; i >= 0; i--) {
 			dtm.removeRow(i);
 		}
-		//dtm.getDataVector().removeAllElements();
 	}
 
 	@Override
@@ -346,7 +342,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		}; break;
 		case EventosTurno.MOSTRAR_TURNO_OK: {
 			TTurno turno = (TTurno) contexto.getObjeto();
-			dtm.addRow(new Object[] {turno.getID(), turno.getNombre(), turno.getHoraInicio(), turno.getHoraFin(), turno.getActivo()});
+			dtm.addRow(new Object[] {turno.getID(), turno.getNombre(), turno.getHoraInicio(), turno.getHoraFin(), turno.isActivo()});
 		}; break;
 		case EventosTurno.MOSTRAR_TURNO_KO: {
 			String texto = (String) contexto.getObjeto();
@@ -357,7 +353,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		case EventosTurno.LISTAR_TURNOS_OK: {
 			@SuppressWarnings("unchecked") 	List<TTurno> lista = (List<TTurno>) contexto.getObjeto();
 			for(TTurno t: lista) {
-				dtm.addRow(new Object[] {t.getID(), t.getNombre(), t.getHoraInicio(), t.getHoraFin(), t.getActivo()});
+				dtm.addRow(new Object[] {t.getID(), t.getNombre(), t.getHoraInicio(), t.getHoraFin(), t.isActivo()});
 			}
 		}; break;
 		case EventosTurno.LISTAR_TURNOS_KO: {

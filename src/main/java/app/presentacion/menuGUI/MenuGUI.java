@@ -27,8 +27,7 @@ public class MenuGUI extends JFrame implements GUI{
 		vista();
 	}
 
-	@Override
-	public void vista() {
+	private void vista() {
 		setSize(1080, 720);
 		setLocationRelativeTo(null);
 		setResizable(false);

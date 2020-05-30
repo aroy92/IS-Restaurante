@@ -45,7 +45,7 @@ public class TurnoDAOImpl implements TurnoDAO{
 		state.setString(1, turno.getNombre());
 		state.setString(2, turno.getHoraInicio().toString());
 		state.setString(3, turno.getHoraFin().toString());
-		state.setBoolean(4, true);
+		state.setBoolean(4, turno.isActivo());
 		state.executeUpdate();
 		
 		ResultSet rs = state.getGeneratedKeys();
@@ -74,7 +74,7 @@ public class TurnoDAOImpl implements TurnoDAO{
 				+ " nombre = '" + turno.getNombre() + "',"
 				+ " hora_inicio = '" + turno.getHoraInicio().toString() + "',"
 				+ " hora_fin = '" + turno.getHoraFin().toString() + "',"
-				+ " activo = " + turno.getActivo()
+				+ " activo = " + turno.isActivo()
 				+ " WHERE id = " + turno.getID()
 				);
 		

@@ -2,8 +2,10 @@ package app.negocio.turno;
 
 import java.util.List;
 
+import app.integracion.empleado.EmpleadoDAO;
 import app.integracion.factoriaDAO.FactoriaDAO;
 import app.integracion.turno.TurnoDAO;
+import app.negocio.empleado.TEmpleado;
 
 public class TurnoSAImpl implements TurnoSA{
 
@@ -22,7 +24,7 @@ public class TurnoSAImpl implements TurnoSA{
 			dao.alta(turno);
 		}
 		else {
-			if(aux.getActivo()) {
+			if(aux.isActivo()) {
 				throw new Exception(" No pueden existir dos turnos con el mismo nombre. ");
 			}
 			else {
@@ -36,17 +38,26 @@ public class TurnoSAImpl implements TurnoSA{
 	@Override
 	public void baja(int id) throws Exception {
 		TurnoDAO dao = FactoriaDAO.getInstance().generarTurnoDAO();
+		EmpleadoDAO daoEmpleado = FactoriaDAO.getInstance().generarEmpleadoDAO();
 		TTurno turno = null;
+		List<TEmpleado> lista = null;
 		
 		turno = dao.readByID(id);
-		if(turno != null && turno.getActivo()) {
-			dao.baja(id);
+		
+		if(turno != null && turno.isActivo()) {
+			lista = daoEmpleado.listarPorTurno(id);
+			if(lista.size() == 0) {
+				dao.baja(id);
+			}
+			else {
+				throw new Exception(" No puedes dar de baja un turno con empleados asignados. ");
+			}
 		}
 		else if(turno == null){
 			throw new Exception(" No existe un turno con el ID introducido. ");
 		}
-		else if (turno != null && !turno.getActivo()){
-			throw new Exception(" El turno seleccionado no está activo. ");
+		else if (turno != null && !turno.isActivo()){
+			throw new Exception(" El turno seleccionado no esta activo. ");
 		}
 	}
 
@@ -79,7 +90,7 @@ public class TurnoSAImpl implements TurnoSA{
 		TTurno turno = null;
 		
 		turno = dao.mostrar(id);
-		if(turno != null && turno.getActivo()) {
+		if(turno != null && turno.isActivo()) {
 			return turno;
 		}
 		else {

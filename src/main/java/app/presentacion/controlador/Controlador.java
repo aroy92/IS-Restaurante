@@ -6,7 +6,7 @@ public abstract class Controlador {
 	private static Controlador instance;
 
 	public static Controlador getInstance() {
-		if (instance == null) {	// Aplicando patrón Singletón
+		if (instance == null) {	// Aplicando patron Singleton
 			instance = new ControladorImpl();
 		}
 

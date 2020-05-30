@@ -8,7 +8,7 @@ public class EventosTurno {
 	public static final int LISTAR_TURNOS = 11;
 	public static final int BUSCAR_TURNO = 12;
 	
-	// Resultado de la operación.
+	// Resultado de la operaciÃ³n.
 	public static final int ALTA_TURNO_OK = 40;
 	public static final int ALTA_TURNO_KO = 41;
 	
