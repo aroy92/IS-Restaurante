@@ -14,6 +14,10 @@ public class EmpleadoSAImpl implements EmpleadoSA{
 		TEmpleado aux = null;
 		TTurno turno = null;
 		
+		if (!empleado.getDNI().matches("^\\d{8}[A-Za-z]$")) {
+			throw new Exception(" El DNI debe contener 8 números seguido de una letra. ");
+		}
+		empleado.setDNI(empleado.getDNI().toUpperCase());
 		if (empleado.getSalario() < 0) {
 			throw new Exception(" El salario no puede ser negativo. ");
 		}
@@ -22,6 +26,7 @@ public class EmpleadoSAImpl implements EmpleadoSA{
 		if (turno == null) {
 			throw new Exception(" No se puede añadir un empleado en un turno inexistente. ");
 		}
+		
 
 		aux = dao.readByDNI(empleado.getDNI());
 		if (aux == null) {

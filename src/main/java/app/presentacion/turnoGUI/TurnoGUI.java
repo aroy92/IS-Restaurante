@@ -97,7 +97,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		barra.add(panelSalir, BorderLayout.EAST);
 		
 		// Creación de la tabla.
-		String[] nombreColummnas = { "ID", "Nombre", "Hora Inicio", "Hora Fin", "Activo"};
+		String[] nombreColummnas = { "ID", "Nombre", "Hora Inicio", "Hora Fin"};
 		dtm = new DefaultTableModel(null, nombreColummnas);
 		tabla = new JTable(dtm);
 		tabla.setPreferredSize(new Dimension(800, 400));
@@ -342,7 +342,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		}; break;
 		case EventosTurno.MOSTRAR_TURNO_OK: {
 			TTurno turno = (TTurno) contexto.getObjeto();
-			dtm.addRow(new Object[] {turno.getID(), turno.getNombre(), turno.getHoraInicio(), turno.getHoraFin(), turno.isActivo()});
+			dtm.addRow(new Object[] {turno.getID(), turno.getNombre(), turno.getHoraInicio(), turno.getHoraFin()});
 		}; break;
 		case EventosTurno.MOSTRAR_TURNO_KO: {
 			String texto = (String) contexto.getObjeto();
@@ -353,7 +353,7 @@ public class TurnoGUI extends JFrame implements GUI{
 		case EventosTurno.LISTAR_TURNOS_OK: {
 			@SuppressWarnings("unchecked") 	List<TTurno> lista = (List<TTurno>) contexto.getObjeto();
 			for(TTurno t: lista) {
-				dtm.addRow(new Object[] {t.getID(), t.getNombre(), t.getHoraInicio(), t.getHoraFin(), t.isActivo()});
+				dtm.addRow(new Object[] {t.getID(), t.getNombre(), t.getHoraInicio(), t.getHoraFin()});
 			}
 		}; break;
 		case EventosTurno.LISTAR_TURNOS_KO: {

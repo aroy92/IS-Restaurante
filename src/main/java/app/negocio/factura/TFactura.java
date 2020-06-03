@@ -5,20 +5,22 @@ import java.util.List;
 
 public class TFactura {
 	private long id;
-	private float total;
+	private double total;
 	private LocalDateTime fecha_emision;
 	private int idEmpleado;
 	private int idCliente;
+	private boolean cerrada;
 	private List<Long> productos;
 	
 	public TFactura() {}
 	
-	public TFactura(long id, float total, LocalDateTime fecha_emision, int idEmpleado, int idCliente, List<Long> productos) {
+	public TFactura(long id, double total, LocalDateTime fecha_emision, int idEmpleado, int idCliente, boolean cerrada, List<Long> productos) {
 		this.setId(id);
 		this.setTotal(total);
 		this.setFechaEmision(fecha_emision);
 		this.setIdEmpleado(idEmpleado);
 		this.setIdCliente(idCliente);
+		this.setCerrada(cerrada);
 		this.setProductos(productos);
 	}
 
@@ -30,11 +32,11 @@ public class TFactura {
 		this.id = id;
 	}
 
-	public float getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
@@ -68,5 +70,13 @@ public class TFactura {
 
 	public void setProductos(List<Long> productos) {
 		this.productos = productos;
+	}
+
+	public boolean isCerrada() {
+		return cerrada;
+	}
+
+	public void setCerrada(boolean cerrada) {
+		this.cerrada = cerrada;
 	}
 }

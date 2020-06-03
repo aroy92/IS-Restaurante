@@ -83,6 +83,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		
 		Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 		PreparedStatement state = connection.prepareStatement("SELECT * FROM facturas WHERE id_cliente = ?");
+		state.setInt(1, id);
 		ResultSet rs = state.executeQuery();
 		
 		while(rs.next()) {
@@ -91,7 +92,8 @@ public class ClienteDAOImpl implements ClienteDAO{
 			factura.setIdCliente(rs.getInt("id_cliente"));
 			factura.setIdEmpleado(rs.getInt("id_empleado"));
 			factura.setTotal(rs.getFloat("total"));
-			factura.setFechaEmision(LocalDateTime.parse(rs.getString("fecha_emision")));
+			factura.setFechaEmision(LocalDateTime.parse(rs.getString("fecha_emision").replace(' ', 'T')));
+			factura.setCerrada(rs.getBoolean("cerrada"));
 			
 			facturas.add(factura);
 		}

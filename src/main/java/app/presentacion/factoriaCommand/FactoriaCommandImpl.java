@@ -11,6 +11,12 @@ import app.presentacion.comandos.empleado.EditarEmpleadoCommand;
 import app.presentacion.comandos.empleado.ListarEmpleadosCommand;
 import app.presentacion.comandos.empleado.ListarEmpleadosTurnoCommand;
 import app.presentacion.comandos.empleado.MostrarEmpleadoCommand;
+import app.presentacion.comandos.factura.AbrirFacturaCommand;
+import app.presentacion.comandos.factura.AnadirProductoAFacturaCommand;
+import app.presentacion.comandos.factura.CerrarFacturaCommand;
+import app.presentacion.comandos.factura.EliminarProductoDeFacturaCommand;
+import app.presentacion.comandos.factura.MostrarFacturaCommand;
+import app.presentacion.comandos.factura.MostrarFacturaProductosCommand;
 import app.presentacion.comandos.menu.MostrarClienteGUICommand;
 import app.presentacion.comandos.menu.MostrarEmpleadoGUICommand;
 import app.presentacion.comandos.menu.MostrarFacturaGUICommand;
@@ -31,6 +37,7 @@ import app.presentacion.comandos.turno.ListarTurnoCommand;
 import app.presentacion.comandos.turno.MostrarTurnoCommand;
 import app.presentacion.eventos.EventosCliente;
 import app.presentacion.eventos.EventosEmpleado;
+import app.presentacion.eventos.EventosFactura;
 import app.presentacion.eventos.EventosMenu;
 import app.presentacion.eventos.EventosProducto;
 import app.presentacion.eventos.EventosTurno;
@@ -80,6 +87,14 @@ public class FactoriaCommandImpl extends FactoriaCommand{
 		case EventosProducto.MOSTRAR_PRODUCTO: comando = new MostrarProductoCommand(); break;
 		case EventosProducto.LISTAR_PRODUCTOS: comando = new ListarProductoCommand(); break;
 		case EventosProducto.BUSCAR_PRODUCTO: comando = new BuscarProductoCommand(); break;
+		
+		// Comandos de PRODUCTO
+		case EventosFactura.ABRIR_FACTURA: comando = new AbrirFacturaCommand(); break;
+		case EventosFactura.CERRAR_FACTURA: comando = new CerrarFacturaCommand(); break;
+		case EventosFactura.ANADIR_PRODUCTO_A_FACTURA: comando = new AnadirProductoAFacturaCommand(); break;
+		case EventosFactura.ELIMINAR_PRODUCTO_DE_FACTURA: comando = new EliminarProductoDeFacturaCommand(); break;
+		case EventosFactura.MOSTRAR_FACTURA: comando = new MostrarFacturaCommand(); break;
+		case EventosFactura.MOSTRAR_FACTURA_PRODUCTOS: comando = new MostrarFacturaProductosCommand(); break;
 		}
 		return comando;
 	}

@@ -2,6 +2,7 @@ package app.negocio.factoriaSA;
 
 import app.negocio.cliente.ClienteSA;
 import app.negocio.empleado.EmpleadoSA;
+import app.negocio.factura.FacturaSA;
 import app.negocio.producto.ProductoSA;
 import app.negocio.turno.TurnoSA;
 
@@ -19,4 +20,5 @@ public abstract class FactoriaSA {
 	public abstract EmpleadoSA generarEmpleadoSA();
 	public abstract ClienteSA generarClienteSA();
 	public abstract ProductoSA generarProductoSA();
+	public abstract FacturaSA generarFacturaSA();
 }

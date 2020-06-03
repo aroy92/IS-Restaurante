@@ -109,7 +109,7 @@ public class ProductoGUI extends JFrame implements GUI{
 		fondo.add(panelMensaje, BorderLayout.SOUTH);
 		
 		// Panel de botones
-		JButton altaBoton = crearBoton(getClass().getClassLoader().getResource("iconos/turno/alta.png").getPath(), new Color(243, 89, 63));
+		JButton altaBoton = crearBoton(getClass().getClassLoader().getResource("iconos/producto/alta.jpg").getPath(), new Color(243, 89, 63));
 		altaBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JTextField nombreField = new JTextField();
@@ -155,7 +155,7 @@ public class ProductoGUI extends JFrame implements GUI{
 		});
 		panelBotones.add(altaBoton);
 		
-		JButton bajasBoton = crearBoton(getClass().getClassLoader().getResource("iconos/turno/baja.png").getPath(), new Color(0, 112, 192));
+		JButton bajasBoton = crearBoton(getClass().getClassLoader().getResource("iconos/producto/baja.jpg").getPath(), new Color(0, 112, 192));
 		bajasBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
@@ -179,7 +179,7 @@ public class ProductoGUI extends JFrame implements GUI{
 		});
 		panelBotones.add(bajasBoton);
 		
-		JButton editarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/turno/editar.png").getPath(), new Color(91, 155, 213));
+		JButton editarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/producto/editar.jpg").getPath(), new Color(91, 155, 213));
 		editarBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// La operacion de EDITAR se divide en dos partes:
@@ -202,7 +202,7 @@ public class ProductoGUI extends JFrame implements GUI{
 					JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.", "Mensaje de error", JOptionPane.WARNING_MESSAGE);
 				}
 				
-				// 2. Ya con la información cargada de Turno (en caso de que exista), permitimos al usuario modificar sus campos.
+				// 2. Ya con la información cargada de Producto (en caso de que exista), permitimos al usuario modificar sus campos.
 				if (productoBuscar != null) {
 					JTextField nombreField = new JTextField(productoBuscar.getNombre());
 					JTextField precioField = new JTextField(productoBuscar.getPrecio() + "");
@@ -247,11 +247,11 @@ public class ProductoGUI extends JFrame implements GUI{
 		});
 		panelBotones.add(editarBoton);
 		
-		JButton mostrarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/turno/mostrar.png").getPath(), new Color(112, 173, 71));
+		JButton mostrarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/producto/mostrar.jpg").getPath(), new Color(112, 173, 71));
 		mostrarBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
-					String idString = JOptionPane.showInputDialog(null, "Introduce ID:", "EDITAR PRODUCTO", JOptionPane.QUESTION_MESSAGE);
+					String idString = JOptionPane.showInputDialog(null, "Introduce ID:", "MOSTRAR PRODUCTO", JOptionPane.QUESTION_MESSAGE);
 					if(idString != null) {
 						idString = idString.trim();
 						if (idString.length() == 0) {
@@ -271,7 +271,7 @@ public class ProductoGUI extends JFrame implements GUI{
 		});
 		panelBotones.add(mostrarBoton);
 		
-		JButton listarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/turno/listar.png").getPath(), new Color(255, 192, 0));
+		JButton listarBoton = crearBoton(getClass().getClassLoader().getResource("iconos/producto/listar.jpg").getPath(), new Color(255, 192, 0));
 		listarBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				Contexto contexto = new Contexto(EventosProducto.LISTAR_PRODUCTOS, null);
@@ -340,6 +340,7 @@ public class ProductoGUI extends JFrame implements GUI{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Contexto contexto) {	
 		// Antes de actualizar, limpiamos el contenido de mensaje (JLabel) y de dtm (DefaultTableModel) para que los resultados de operaciones anteriores
@@ -395,7 +396,7 @@ public class ProductoGUI extends JFrame implements GUI{
 			mensaje.setBackground(new Color(218, 63, 54));
 		}; break;
 		case EventosProducto.LISTAR_PRODUCTOS_OK: {
-			@SuppressWarnings("unchecked") 	List<TProducto> lista = (List<TProducto>) contexto.getObjeto();
+			List<TProducto> lista = (List<TProducto>) contexto.getObjeto();
 			for(TProducto producto : lista) {
 				dtm.addRow(new Object[] {producto.getId(), producto.getNombre(), producto.getPrecio()});
 			}

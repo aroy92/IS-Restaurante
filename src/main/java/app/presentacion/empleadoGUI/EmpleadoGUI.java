@@ -96,7 +96,7 @@ public class EmpleadoGUI extends JFrame implements GUI{
 		barra.add(panelSalir, BorderLayout.EAST);
 		
 		// Creación de la tabla.
-		String[] nombreColummnas = { "ID", "Nombre", "DNI", "Salario", "Activo", "ID Turno"};
+		String[] nombreColummnas = { "ID", "Nombre", "DNI", "Salario", "ID Turno"};
 		dtm = new DefaultTableModel(null, nombreColummnas);
 		tabla = new JTable(dtm);
 		tabla.setPreferredSize(new Dimension(800, 400));
@@ -359,7 +359,7 @@ public class EmpleadoGUI extends JFrame implements GUI{
 		}; break;
 		case EventosEmpleado.MOSTRAR_EMPLEADO_OK: {
 			TEmpleado empleado = (TEmpleado) contexto.getObjeto();
-			dtm.addRow(new Object[] {empleado.getId(), empleado.getNombre(), empleado.getDNI(), empleado.getSalario(), empleado.isActivo(), empleado.getIdTurno()});
+			dtm.addRow(new Object[] {empleado.getId(), empleado.getNombre(), empleado.getDNI(), empleado.getSalario(), empleado.getIdTurno()});
 		}; break;
 		case EventosEmpleado.MOSTRAR_EMPLEADO_KO: {
 			String texto = (String) contexto.getObjeto();
@@ -370,7 +370,7 @@ public class EmpleadoGUI extends JFrame implements GUI{
 		case EventosEmpleado.LISTAR_EMPLEADOS_OK: {
 			@SuppressWarnings("unchecked") 	List<TEmpleado> lista = (List<TEmpleado>) contexto.getObjeto();
 			for(TEmpleado e: lista) {
-				dtm.addRow(new Object[] {e.getId(), e.getNombre(), e.getDNI(), e.getSalario(), e.isActivo(), e.getIdTurno()});
+				dtm.addRow(new Object[] {e.getId(), e.getNombre(), e.getDNI(), e.getSalario(), e.getIdTurno()});
 			}
 		}; break;
 		case EventosEmpleado.LISTAR_EMPLEADOS_KO: {
@@ -382,7 +382,7 @@ public class EmpleadoGUI extends JFrame implements GUI{
 		case EventosEmpleado.LISTAR_EMPLEADOS_TURNO_OK: {
 			@SuppressWarnings("unchecked") 	List<TEmpleado> lista = (List<TEmpleado>) contexto.getObjeto();
 			for(TEmpleado e: lista) {
-				dtm.addRow(new Object[] {e.getId(), e.getNombre(), e.getDNI(), e.getSalario(), e.isActivo(), e.getIdTurno()});
+				dtm.addRow(new Object[] {e.getId(), e.getNombre(), e.getDNI(), e.getSalario(), e.getIdTurno()});
 			}
 		}; break;
 		case EventosEmpleado.LISTAR_EMPLEADOS_TURNO_KO: {

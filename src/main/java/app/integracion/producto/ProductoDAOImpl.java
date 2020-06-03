@@ -109,7 +109,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 		Statement state = connection.createStatement();
 		ResultSet rs = state.executeQuery("SELECT * FROM productos WHERE activo = true");
 		
-		if (rs.next()) {
+		while (rs.next()) {
 			productos.add(new TProducto(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("precio"), rs.getBoolean("activo")));
 		}
 		

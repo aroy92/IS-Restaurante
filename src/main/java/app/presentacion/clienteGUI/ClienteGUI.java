@@ -140,7 +140,7 @@ public class ClienteGUI extends JFrame implements GUI{
 		});
 		panelBotones.add(listarBoton);
 		
-		JButton listarFacturasBoton =  crearBoton(getClass().getClassLoader().getResource("iconos/cliente/listarFacturas.png").getPath(), new Color(255, 192, 0));
+		JButton listarFacturasBoton = crearBoton(getClass().getClassLoader().getResource("iconos/cliente/listarFacturas.png").getPath(), new Color(255, 192, 0));
 		listarFacturasBoton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String idString = JOptionPane.showInputDialog(null, "Introduce ID de cliente:", "LISTAR FACTURAS DE CLIENTE", JOptionPane.QUESTION_MESSAGE);
@@ -255,12 +255,12 @@ public class ClienteGUI extends JFrame implements GUI{
 		}; break;
 		case EventosCliente.LISTAR_FACTURAS_CLIENTE_OK: {
 			@SuppressWarnings("unchecked") 	List<TFactura> lista = (List<TFactura>) contexto.getObjeto();
-			String[] nombreColumnas = { "ID Factura", "Fecha emisión", "Precio total"};
-			dtm.setColumnCount(3);
+			String[] nombreColumnas = { "ID Factura", "ID Empleado", "Fecha emisión", "Total", "Cerrada"};
+			dtm.setColumnCount(5);
 			dtm.setColumnIdentifiers(nombreColumnas);
 			
 			for(TFactura f: lista) {
-				dtm.addRow(new Object[] {f.getId(), f.getFechaEmision(), f.getTotal()});
+				dtm.addRow(new Object[] {f.getId(), f.getIdEmpleado(), f.getFechaEmision().toString().replace('T', ' '), f.getTotal(), f.isCerrada() ? "SI" : "NO"});
 			}
 		}; break;
 		case EventosCliente.LISTAR_FACTURAS_CLIENTE_KO: {

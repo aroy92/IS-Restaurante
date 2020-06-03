@@ -4,6 +4,8 @@ import app.negocio.cliente.ClienteSA;
 import app.negocio.cliente.ClienteSAImpl;
 import app.negocio.empleado.EmpleadoSA;
 import app.negocio.empleado.EmpleadoSAImpl;
+import app.negocio.factura.FacturaSA;
+import app.negocio.factura.FacturaSAImpl;
 import app.negocio.producto.ProductoSA;
 import app.negocio.producto.ProductoSAImpl;
 import app.negocio.turno.TurnoSA;
@@ -31,7 +33,10 @@ public class FactoriaSAImpl extends FactoriaSA {
 		return new ProductoSAImpl();
 	}
 	
-	
+	@Override
+	public FacturaSA generarFacturaSA() {
+		return new FacturaSAImpl();
+	}
 
 	//---------
 }
