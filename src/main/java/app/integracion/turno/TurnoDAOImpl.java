@@ -33,8 +33,8 @@ public class TurnoDAOImpl implements TurnoDAO{
     	    }
         }
         URL = "jdbc:mysql://" + prop.getProperty("db.url", "127.0.0.1") + ":" + prop.getProperty("db.port", "3306") + "/" + prop.getProperty("db.database", "restaurantedb");
-        USER = prop.getProperty("db.user", "root");
-        PASSWORD = prop.getProperty("db.pass", "");
+        USER = "root";
+        PASSWORD = "";
 	}
 	
 	@Override
