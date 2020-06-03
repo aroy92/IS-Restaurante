@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2020 a las 17:51:51
+-- Tiempo de generación: 03-06-2020 a las 14:34:00
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -18,37 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `restauranteDB`
+-- Base de datos: `restaurantedb`
 --
-CREATE DATABASE IF NOT EXISTS `restauranteDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `restauranteDB`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `facturas`
---
-
-CREATE TABLE `facturas` (
-  `id` bigint(20) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_empleado` int(11) NOT NULL,
-  `total` float NOT NULL,
-  `fecha_emision` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `facturas_productos`
---
-
-CREATE TABLE `facturas_productos` (
-  `id_factura` bigint(20) NOT NULL,
-  `id_producto` bigint(20) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `precio` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE DATABASE IF NOT EXISTS `restaurantedb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `restaurantedb`;
 
 -- --------------------------------------------------------
 
@@ -64,17 +37,6 @@ CREATE TABLE `clientes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bebidas`
---
-
-CREATE TABLE `bebidas` (
-  `id_producto` bigint(20) NOT NULL,
-  `litros` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `empleados`
 --
 
@@ -84,18 +46,35 @@ CREATE TABLE `empleados` (
   `nombre` varchar(255) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `salario` float NOT NULL,
-  `activo` BOOL NOT NULL DEFAULT TRUE
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comidas`
+-- Estructura de tabla para la tabla `facturas`
 --
 
-CREATE TABLE `comidas` (
+CREATE TABLE `facturas` (
+  `id` bigint(20) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `total` double NOT NULL DEFAULT 0,
+  `fecha_emision` timestamp NOT NULL DEFAULT current_timestamp(),
+  `cerrada` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas_productos`
+--
+
+CREATE TABLE `facturas_productos` (
+  `id_factura` bigint(20) NOT NULL,
   `id_producto` bigint(20) NOT NULL,
-  `kilogramos` float NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -108,7 +87,7 @@ CREATE TABLE `productos` (
   `id` bigint(20) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `precio` float NOT NULL,
-  `activo` BOOL NOT NULL DEFAULT TRUE
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -122,12 +101,27 @@ CREATE TABLE `turnos` (
   `nombre` varchar(255) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
-  `activo` BOOL NOT NULL DEFAULT TRUE
+  `activo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nombre` (`nombre`);
+
+--
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nombre` (`nombre`),
+  ADD KEY `id_turno` (`id_turno`);
 
 --
 -- Indices de la tabla `facturas`
@@ -143,33 +137,6 @@ ALTER TABLE `facturas`
 ALTER TABLE `facturas_productos`
   ADD PRIMARY KEY (`id_factura`,`id_producto`),
   ADD KEY `id_producto` (`id_producto`);
-
---
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nombre` (`nombre`);
-
---
--- Indices de la tabla `bebidas`
---
-ALTER TABLE `bebidas`
-  ADD PRIMARY KEY (`id_producto`);
-
---
--- Indices de la tabla `empleados`
---
-ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nombre` (`nombre`),
-  ADD KEY `id_turno` (`id_turno`);
-
---
--- Indices de la tabla `comidas`
---
-ALTER TABLE `comidas`
-  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- Indices de la tabla `productos`
@@ -188,38 +155,44 @@ ALTER TABLE `turnos`
 --
 
 --
--- AUTO_INCREMENT de la tabla `facturas`
---
-ALTER TABLE `facturas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`id_turno`) REFERENCES `turnos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `facturas`
@@ -234,24 +207,6 @@ ALTER TABLE `facturas`
 ALTER TABLE `facturas_productos`
   ADD CONSTRAINT `facturas_productos_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `facturas_productos_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `bebidas`
---
-ALTER TABLE `bebidas`
-  ADD CONSTRAINT `bebidas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `empleados`
---
-ALTER TABLE `empleados`
-  ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`id_turno`) REFERENCES `turnos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `comidas`
---
-ALTER TABLE `comidas`
-  ADD CONSTRAINT `comidas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
