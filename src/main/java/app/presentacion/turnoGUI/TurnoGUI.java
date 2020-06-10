@@ -190,7 +190,7 @@ public class TurnoGUI extends JFrame implements GUI{
 					int opcion = JOptionPane.showConfirmDialog(null, mensaje, "EDITAR TURNO", JOptionPane.OK_CANCEL_OPTION);
 					if(opcion == JOptionPane.OK_OPTION) {
 						try {
-							if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null && nombreField.getText().equalsIgnoreCase("") && horaInicioField.getText().equalsIgnoreCase("") && horaFinField.getText().equalsIgnoreCase("")) {
+							if(nombreField.getText() != null && horaInicioField.getText() != null && horaFinField.getText() != null && !nombreField.getText().equalsIgnoreCase("") && !horaInicioField.getText().equalsIgnoreCase("") && !horaFinField.getText().equalsIgnoreCase("")) {
 								TTurno turno = new TTurno();
 								turno.setID(turnoBuscar.getID());
 								turno.setNombre(nombreField.getText());
