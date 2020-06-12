@@ -31,7 +31,7 @@ public class ProductoDAOImpl implements ProductoDAO {
     			System.out.println("Cannot open config.properties file: " + ex.getMessage());
     	    }
         }
-        URL = "jdbc:mysql://" + prop.getProperty("db.url", "127.0.0.1") + ":" + prop.getProperty("db.port", "3306") + "/" + prop.getProperty("db.database", "restaurantedb");
+        URL = "jdbc:mysql://" + prop.getProperty("db.url", "127.0.0.1") + ":" + prop.getProperty("db.port", "3306") + "/" + prop.getProperty("db.database", "restaurantedb") + "?useUnicode=true&serverTimezone=UTC";;
         USER = "root";
         PASSWORD = "";
 	}
